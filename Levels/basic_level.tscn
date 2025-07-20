@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=4 uid="uid://cglghmg46c71o"]
+[gd_scene load_steps=6 format=4 uid="uid://cglghmg46c71o"]
 
 [ext_resource type="Texture2D" uid="uid://ctksl4w4dnef7" path="res://Art/Tiles.png" id="1_fji1c"]
-[ext_resource type="Script" uid="uid://bdv2xs8g4yuku" path="res://Scripts/player.gd" id="2_a3f5f"]
 [ext_resource type="Script" uid="uid://dwpi43xjn4fqq" path="res://Scripts/follow_object.gd" id="2_xwcnx"]
-[ext_resource type="Texture2D" uid="uid://2p4uetd0a3ud" path="res://Art/Player.png" id="4_xwcnx"]
+[ext_resource type="PackedScene" uid="uid://ddnxpg34jjss6" path="res://Prefabs/player.tscn" id="3_a3f5f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b41s8"]
 texture = ExtResource("1_fji1c")
@@ -16,14 +15,11 @@ tile_size = Vector2i(256, 256)
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_b41s8")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b41s8"]
-size = Vector2(256, 256)
-
 [node name="Basic Level" type="Node2D"]
 
 [node name="FGTiles" type="TileMapLayer" parent="."]
 position = Vector2(0, 384)
-tile_map_data = PackedByteArray("AAACAP//AQAAAAAAAAAGAP//AQAAAAAAAAAKAP//AQAAAAAAAAD5////AQAAAAAAAAD6////AQAAAAAAAAD7////AQAAAAAAAAD8////AQAAAAAAAAD9////AQAAAAAAAAD+////AQAAAAAAAAD/////AQAAAAAAAAAAAP//AQAAAAAAAAABAP//AQAAAAAAAAADAP//AQAAAAAAAAAEAP//AQAAAAAAAAAFAP//AQAAAAAAAAAHAP//AQAAAAAAAAAIAP//AQAAAAAAAAAJAP//AQAAAAAAAAALAP//AQAAAAAAAAAMAP//AQAAAAAAAAANAP//AQAAAAAAAAAOAP//AQAAAAAAAAAPAP//AQAAAAAAAAAQAP//AQAAAAAAAAARAP//AQAAAAAAAAASAP//AQAAAAAAAAATAP//AQAAAAAAAAAUAP//AQAAAAAAAAAVAP//AQAAAAAAAAAWAP//AQAAAAAAAAAXAP//AQAAAAAAAAAYAP//AQAAAAAAAAAZAP//AQAAAAAAAAAaAP//AQAAAAAAAAAbAP//AQAAAAAAAAAcAP//AQAAAAAAAAAdAP//AQAAAAAAAAAeAP//AQAAAAAAAAAfAP//AQAAAAAAAAAgAP//AQAAAAAAAAAhAP//AQAAAAAAAAAiAP//AQAAAAAAAAAjAP//AQAAAAAAAAAkAP//AQAAAAAAAAAlAP//AQAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAACAP//AQAAAAAAAAAGAP//AQAAAAAAAAAKAP//AQAAAAAAAAD5////AQAAAAAAAAD6////AQAAAAAAAAD7////AQAAAAAAAAD8////AQAAAAAAAAD9////AQAAAAAAAAD+////AQAAAAAAAAD/////AQAAAAAAAAAAAP//AQAAAAAAAAABAP//AQAAAAAAAAADAP//AQAAAAAAAAAEAP//AQAAAAAAAAAFAP//AQAAAAAAAAAHAP//AQAAAAAAAAAIAP//AQAAAAAAAAAJAP//AQAAAAAAAAALAP//AQAAAAAAAAAMAP//AQAAAAAAAAANAP//AQAAAAAAAAAOAP//AQAAAAAAAAAPAP//AQAAAAAAAAAQAP//AQAAAAAAAAARAP//AQAAAAAAAAASAP//AQAAAAAAAAATAP//AQAAAAAAAAAUAP//AQAAAAAAAAAVAP//AQAAAAAAAAAWAP//AQAAAAAAAAAXAP//AQAAAAAAAAAYAP//AQAAAAAAAAAZAP//AQAAAAAAAAAaAP//AQAAAAAAAAAbAP//AQAAAAAAAAAcAP//AQAAAAAAAAAdAP//AQAAAAAAAAAeAP//AQAAAAAAAAAfAP//AQAAAAAAAAAgAP//AQAAAAAAAAAhAP//AQAAAAAAAAAiAP//AQAAAAAAAAAjAP//AQAAAAAAAAAkAP//AQAAAAAAAAAlAP//AQAAAAAAAAADAPz/AQAAAAAAAAAEAPz/AQAAAAAAAAAFAPz/AQAAAAAAAAAGAPz/AQAAAAAAAAAHAPz/AQAAAAAAAAAIAPz/AQAAAAAAAAAJAPz/AQAAAAAAAAD///7/AQAAAAAAAAALAP3/AQAAAAAAAAAMAP3/AQAAAAAAAAANAP3/AQAAAAAAAAAOAP3/AQAAAAAAAAAPAP3/AQAAAAAAAAA=")
 tile_set = SubResource("TileSet_a3f5f")
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("followed_object")]
@@ -33,15 +29,5 @@ script = ExtResource("2_xwcnx")
 followed_object = NodePath("../Player")
 x_offset = 10.0
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" parent="." instance=ExtResource("3_a3f5f")]
 position = Vector2(-1408, 0)
-script = ExtResource("2_a3f5f")
-x_velocity_tiles = 8.75
-jump_time = 0.5
-spins_per_jump = 0.5
-
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-texture = ExtResource("4_xwcnx")
-
-[node name="Collider" type="CollisionShape2D" parent="Player"]
-shape = SubResource("RectangleShape2D_b41s8")
