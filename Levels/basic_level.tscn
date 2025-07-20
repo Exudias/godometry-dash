@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=4 uid="uid://cglghmg46c71o"]
+
+[ext_resource type="Texture2D" uid="uid://ctksl4w4dnef7" path="res://Art/Tiles.png" id="1_fji1c"]
+[ext_resource type="Script" uid="uid://bdv2xs8g4yuku" path="res://Scripts/player.gd" id="2_a3f5f"]
+[ext_resource type="Texture2D" uid="uid://mbxj68p427v7" path="res://Art/icon.svg" id="2_b41s8"]
+[ext_resource type="Script" uid="uid://dwpi43xjn4fqq" path="res://Scripts/follow_object.gd" id="2_xwcnx"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b41s8"]
+texture = ExtResource("1_fji1c")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
+
+[sub_resource type="TileSet" id="TileSet_a3f5f"]
+tile_size = Vector2i(256, 256)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_b41s8")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b41s8"]
+size = Vector2(256, 256)
+
+[node name="Basic Level" type="Node2D"]
+
+[node name="FGTiles" type="TileMapLayer" parent="."]
+position = Vector2(0, 384)
+tile_map_data = PackedByteArray("AAACAP//AQAAAAAAAAAGAP7/AQAAAAAAAAAGAP//AQAAAAAAAAAKAP3/AQAAAAAAAAAKAP7/AQAAAAAAAAAKAP//AQAAAAAAAAD5////AQAAAAAAAAD6////AQAAAAAAAAD7////AQAAAAAAAAD8////AQAAAAAAAAD9////AQAAAAAAAAD+////AQAAAAAAAAD/////AQAAAAAAAAAAAP//AQAAAAAAAAABAP//AQAAAAAAAAACAP7/AQAAAAAAAAADAP//AQAAAAAAAAAEAP//AQAAAAAAAAAFAP//AQAAAAAAAAAGAP3/AQAAAAAAAAAHAP//AQAAAAAAAAAIAP//AQAAAAAAAAAJAP//AQAAAAAAAAAKAPz/AQAAAAAAAAA=")
+tile_set = SubResource("TileSet_a3f5f")
+
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("followed_object")]
+position = Vector2(128, -1408)
+zoom = Vector2(0.3, 0.3)
+script = ExtResource("2_xwcnx")
+followed_object = NodePath("../Player")
+x_offset = 10.0
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(-1408, 0)
+script = ExtResource("2_a3f5f")
+x_velocity_tiles = 8.75
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_b41s8")
+
+[node name="Collider" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_b41s8")
