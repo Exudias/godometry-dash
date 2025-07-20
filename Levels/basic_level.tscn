@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://ctksl4w4dnef7" path="res://Art/Tiles.png" id="1_fji1c"]
 [ext_resource type="Script" uid="uid://bdv2xs8g4yuku" path="res://Scripts/player.gd" id="2_a3f5f"]
-[ext_resource type="Texture2D" uid="uid://mbxj68p427v7" path="res://Art/icon.svg" id="2_b41s8"]
 [ext_resource type="Script" uid="uid://dwpi43xjn4fqq" path="res://Scripts/follow_object.gd" id="2_xwcnx"]
+[ext_resource type="Texture2D" uid="uid://2p4uetd0a3ud" path="res://Art/Player.png" id="4_xwcnx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b41s8"]
 texture = ExtResource("1_fji1c")
@@ -23,7 +23,7 @@ size = Vector2(256, 256)
 
 [node name="FGTiles" type="TileMapLayer" parent="."]
 position = Vector2(0, 384)
-tile_map_data = PackedByteArray("AAACAP//AQAAAAAAAAAGAP7/AQAAAAAAAAAGAP//AQAAAAAAAAAKAP3/AQAAAAAAAAAKAP7/AQAAAAAAAAAKAP//AQAAAAAAAAD5////AQAAAAAAAAD6////AQAAAAAAAAD7////AQAAAAAAAAD8////AQAAAAAAAAD9////AQAAAAAAAAD+////AQAAAAAAAAD/////AQAAAAAAAAAAAP//AQAAAAAAAAABAP//AQAAAAAAAAACAP7/AQAAAAAAAAADAP//AQAAAAAAAAAEAP//AQAAAAAAAAAFAP//AQAAAAAAAAAGAP3/AQAAAAAAAAAHAP//AQAAAAAAAAAIAP//AQAAAAAAAAAJAP//AQAAAAAAAAAKAPz/AQAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAACAP//AQAAAAAAAAAGAP//AQAAAAAAAAAKAP//AQAAAAAAAAD5////AQAAAAAAAAD6////AQAAAAAAAAD7////AQAAAAAAAAD8////AQAAAAAAAAD9////AQAAAAAAAAD+////AQAAAAAAAAD/////AQAAAAAAAAAAAP//AQAAAAAAAAABAP//AQAAAAAAAAADAP//AQAAAAAAAAAEAP//AQAAAAAAAAAFAP//AQAAAAAAAAAHAP//AQAAAAAAAAAIAP//AQAAAAAAAAAJAP//AQAAAAAAAAALAP//AQAAAAAAAAAMAP//AQAAAAAAAAANAP//AQAAAAAAAAAOAP//AQAAAAAAAAAPAP//AQAAAAAAAAAQAP//AQAAAAAAAAARAP//AQAAAAAAAAASAP//AQAAAAAAAAATAP//AQAAAAAAAAAUAP//AQAAAAAAAAAVAP//AQAAAAAAAAAWAP//AQAAAAAAAAAXAP//AQAAAAAAAAAYAP//AQAAAAAAAAAZAP//AQAAAAAAAAAaAP//AQAAAAAAAAAbAP//AQAAAAAAAAAcAP//AQAAAAAAAAAdAP//AQAAAAAAAAAeAP//AQAAAAAAAAAfAP//AQAAAAAAAAAgAP//AQAAAAAAAAAhAP//AQAAAAAAAAAiAP//AQAAAAAAAAAjAP//AQAAAAAAAAAkAP//AQAAAAAAAAAlAP//AQAAAAAAAAA=")
 tile_set = SubResource("TileSet_a3f5f")
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("followed_object")]
@@ -37,10 +37,11 @@ x_offset = 10.0
 position = Vector2(-1408, 0)
 script = ExtResource("2_a3f5f")
 x_velocity_tiles = 8.75
+jump_time = 0.5
+spins_per_jump = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-scale = Vector2(2, 2)
-texture = ExtResource("2_b41s8")
+texture = ExtResource("4_xwcnx")
 
 [node name="Collider" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_b41s8")

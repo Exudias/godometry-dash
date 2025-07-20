@@ -3,27 +3,26 @@ extends CharacterBody2D
 @export var x_velocity_tiles : float = 1500
 @export var jump_height_tiles : float = 2
 @export var jump_time : float = 0.25
+@export var spins_per_jump: float = 0.25
 
 # Calculated properties
 var x_velocity : float
 var jump_height : float
 var jump_velocity : float
 var gravity : float
+var rotation_speed : float
 
 func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_SPACE) and self.is_on_floor():
 		jump()
 
-	print($Sprite2D.rotation_degrees)
 	if not self.is_on_floor():
-		$Sprite2D.rotate(PI * delta)
-		if $Sprite2D.rotation_degrees > 360:
-			$Sprite2D.rotation_degrees -= 0
+		$Sprite2D.rotate(rotation_speed * delta)
 	else:
-		var reset_rotation = $Sprite2D.rotation_degrees
-		reset_rotation = fmod(reset_rotation, 360.0)
-		var closest_90 = round(reset_rotation / 90.0)
-		$Sprite2D.rotation_degrees = closest_90 * 90
+		var reset_rotation = $Sprite2D.rotation
+		reset_rotation = fmod(reset_rotation, 2 * PI)
+		var closest_right_angle = round(reset_rotation / (PI / 2))
+		$Sprite2D.rotation = closest_right_angle * PI / 2
 
 func _physics_process(delta: float) -> void:
 	apply_half_gravity(delta)
@@ -35,7 +34,7 @@ func _physics_process(delta: float) -> void:
 		die()
 		return
 
-	if global_position.y > 512:
+	if global_position.y > 2 * Constants.TILE_SIZE:
 		die()
 		return
 	
@@ -47,8 +46,10 @@ func _ready() -> void:
 	
 	velocity = Vector2(x_velocity, 0)
 	
-	gravity = (2 * jump_height) / (jump_time ** 2)
+	gravity = (2 * jump_height) / ((jump_time / 2) ** 2)
 	jump_velocity = sqrt(2 * jump_height * gravity)
+	
+	rotation_speed = 2 * PI * spins_per_jump / jump_time
 
 func die():
 	get_tree().reload_current_scene()
